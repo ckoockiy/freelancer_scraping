@@ -64,16 +64,16 @@ class Freelancer:
                     "div", attrs={"class": "NativeElement ng-star-inserted"})
 
                 find_location = '_ngcontent-sc45="" class="NativeElement ng-star-inserted" data-color="dark" data-line-break="false" data-size="xsmall" data-style="normal" data-text-transform="capitalize"'
-                location = False
+                location = True
                 for i in data_elements:
 
                     # ubicacion
-                    if location == False:
+                    if location:
 
                         if find_location in str(i):
 
                             print("".join(i.text.split()))
-                            location = True
+                            location = False
 
                     # fecha de union
                     if "Se unió" in i.text:
@@ -82,6 +82,28 @@ class Freelancer:
                     # numero de recomendaciones
                     if "recomendaciones" in i.text or "Recomendación" in i.text:
                         print(" ".join(i.text.split()))
+
+                # calificacion del usuario "nivel de estrellas"
+                calificacion_estrellas = soup.find_all(
+                    "fl-bit", attrs={"class": "ValueBlock ng-star-inserted"})
+                for i in calificacion_estrellas:
+                    print(" ".join(i.text.split())," calificacion estrellas")
+                    break
+
+                # calificacion del usuario "nivel de estrellas"                
+                monto_element = soup.find_all(
+                    "fl-text", attrs={"class": "EarningsText ng-star-inserted"})
+                for i in monto_element:
+                    print(" ".join(i.text.split()),"Monto ganado")
+                    break
+                
+                # porcentajes de reputacion
+                porcentaje_reputacion = soup.find_all(
+                    "fl-bit", attrs={"class": "ReputationItem ng-star-inserted"})
+                for i in porcentaje_reputacion:
+                    print(" ".join(i.text.split()))
+                    
+                    
 
 
 if __name__ == "__main__":
