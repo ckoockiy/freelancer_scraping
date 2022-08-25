@@ -20,9 +20,6 @@ class Freelancer:
                 for i in res:
                     self.users.append(i.replace('"', ''))
 
-            # rating = re.findall('data-star_rating="[0-9].[0-9]', r.text)
-            # print(rating)
-
     def getFreelancerData(self):
 
         if self.users:
@@ -87,23 +84,27 @@ class Freelancer:
                 calificacion_estrellas = soup.find_all(
                     "fl-bit", attrs={"class": "ValueBlock ng-star-inserted"})
                 for i in calificacion_estrellas:
-                    print(" ".join(i.text.split())," calificacion estrellas")
+                    print(" ".join(i.text.split()), " calificacion estrellas")
                     break
 
-                # calificacion del usuario "nivel de estrellas"                
+                # Monto ganado
                 monto_element = soup.find_all(
                     "fl-text", attrs={"class": "EarningsText ng-star-inserted"})
                 for i in monto_element:
-                    print(" ".join(i.text.split()),"Monto ganado")
+                    print(" ".join(i.text.split()), "Monto ganado")
                     break
-                
+
                 # porcentajes de reputacion
                 porcentaje_reputacion = soup.find_all(
                     "fl-bit", attrs={"class": "ReputationItem ng-star-inserted"})
                 for i in porcentaje_reputacion:
                     print(" ".join(i.text.split()))
-                    
-                    
+
+                # principales habilidades
+                principales_habilidades = soup.find_all(
+                    "fl-bit", attrs={"class": "UserProfileSkill"})
+                for i in principales_habilidades:
+                    print(" ".join(i.text.split()))
 
 
 if __name__ == "__main__":
