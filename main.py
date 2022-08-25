@@ -52,24 +52,36 @@ class Freelancer:
                 tarifa = soup.find_all(
                     "div", attrs={"class": "NativeElement ng-star-inserted"})
 
-                
                 for i in tarifa:
 
                     precio = re.findall('\$[0-9]?[0-9] USD / hora', i.text)
                     if precio:
-                        print("-->", precio)
+                        print(precio[0])
                         break
-                
+
                 # ubicacion del usuario
-                location = soup.find_all(
+                data_elements = soup.find_all(
                     "div", attrs={"class": "NativeElement ng-star-inserted"})
+
                 find_location = '_ngcontent-sc45="" class="NativeElement ng-star-inserted" data-color="dark" data-line-break="false" data-size="xsmall" data-style="normal" data-text-transform="capitalize"'
-                for i in location:
+                location = False
+                for i in data_elements:
 
-                    if find_location in str(i):
+                    # ubicacion
+                    if location == False:
 
-                        print("".join(i.text.split()))
-                        break
+                        if find_location in str(i):
+
+                            print("".join(i.text.split()))
+                            location = True
+
+                    # fecha de union
+                    if "Se unió" in i.text:
+                        print(" ".join(i.text.split()))
+
+                    # numero de recomendaciones
+                    if "recomendaciones" in i.text or "Recomendación" in i.text:
+                        print(" ".join(i.text.split()))
 
 
 if __name__ == "__main__":
