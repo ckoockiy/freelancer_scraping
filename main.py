@@ -23,12 +23,7 @@ class Freelancer:
     def getFreelancerData(self):
 
         if self.users:
-            '''
-            for i in self.users:
-                r = requests.get(f"https://www.freelancer.mx{i}")
-                if r.status_code == 200:
-                    pass
-            '''
+            
             r = requests.get(f"https://www.freelancer.mx{self.users[0]}")
             print(r.url)
 
